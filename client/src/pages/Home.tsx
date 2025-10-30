@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { MapPin, Building2, Users, Wrench, ArrowRight } from "lucide-react";
-import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
+import { APP_LOGO, APP_TITLE } from "@/const";
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 
@@ -32,7 +32,7 @@ export default function Home() {
             {APP_LOGO && <img src={APP_LOGO} alt={APP_TITLE} className="h-10 w-10" />}
             <span className="text-xl font-bold">{APP_TITLE}</span>
           </div>
-          <Button onClick={() => window.location.href = getLoginUrl()}>
+          <Button onClick={() => setLocation("/login")}>
             Sign In
           </Button>
         </div>
@@ -50,7 +50,7 @@ export default function Home() {
             automated workflows, and comprehensive tracking.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Button size="lg" onClick={() => window.location.href = getLoginUrl()}>
+            <Button size="lg" onClick={() => setLocation("/login")}>
               Get Started
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
