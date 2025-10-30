@@ -3,10 +3,8 @@
     {
       "source": "/api/:path*",
       "destination": "https://adlocations-backend-production.up.railway.app/api/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
