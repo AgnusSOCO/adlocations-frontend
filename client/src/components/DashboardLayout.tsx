@@ -297,6 +297,19 @@ function DashboardLayoutContent({
             </div>
           </div>
         )}
+        {!isMobile && (
+          <div className="flex border-b h-14 items-center justify-between bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium tracking-tight text-foreground">
+                {activeMenuItem?.label ?? APP_TITLE}
+              </span>
+            </div>
+            <div className="ml-auto flex items-center gap-2">
+              <LanguageSwitcher />
+              <CurrencySwitcher />
+            </div>
+          </div>
+        )}
         <main className="flex-1 p-4">{children}</main>
       </SidebarInset>
       <AIAssistant />
