@@ -29,14 +29,15 @@ import { Button } from "./ui/button";
 import { AIAssistant } from "./AIAssistant";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CurrencySwitcher } from "./CurrencySwitcher";
+import { useTranslation } from "react-i18next";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-  { icon: MapPin, label: "Ad Locations", path: "/ads" },
-  { icon: Map, label: "Map Overview", path: "/map" },
-  { icon: Building2, label: "Landlords", path: "/landlords" },
-  { icon: Users, label: "Clients", path: "/clients" },
-  { icon: Wrench, label: "Structures", path: "/structures" },
+  { icon: LayoutDashboard, labelKey: "dashboard", path: "/dashboard" },
+  { icon: MapPin, labelKey: "adLocations", path: "/ads" },
+  { icon: Map, labelKey: "mapOverview", path: "/map" },
+  { icon: Building2, labelKey: "landlords", path: "/landlords" },
+  { icon: Users, labelKey: "clients", path: "/clients" },
+  { icon: Wrench, labelKey: "structures", path: "/structures" },
 ];
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
@@ -80,7 +81,7 @@ export default function DashboardLayout({
             <div className="text-center space-y-2">
               <h1 className="text-2xl font-bold tracking-tight">{APP_TITLE}</h1>
               <p className="text-sm text-muted-foreground">
-                Please sign in to continue
+                {t("pleaseSignIn")}
               </p>
             </div>
           </div>
@@ -91,7 +92,7 @@ export default function DashboardLayout({
             size="lg"
             className="w-full shadow-lg hover:shadow-xl transition-all"
           >
-            Sign in
+            {t("signIn")}
           </Button>
         </div>
       </div>
@@ -130,6 +131,7 @@ function DashboardLayoutContent({
   const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isCollapsed) {
@@ -223,13 +225,13 @@ function DashboardLayoutContent({
                     <SidebarMenuButton
                       isActive={isActive}
                       onClick={() => setLocation(item.path)}
-                      tooltip={item.label}
+                      tooltip={t(item.labelKey)}
                       className={`h-10 transition-all font-normal`}
                     >
                       <item.icon
                         className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
                       />
-                      <span>{item.label}</span>
+                      <span>{t(item.labelKey)}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
@@ -262,7 +264,7 @@ function DashboardLayoutContent({
                   className="cursor-pointer text-destructive focus:text-destructive"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Sign out</span>
+                  <span>{t("signOut")}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -290,10 +292,23 @@ function DashboardLayoutContent({
               <div className="flex items-center gap-3">
                 <div className="flex flex-col gap-1">
                   <span className="tracking-tight text-foreground">
-                    {activeMenuItem?.label ?? APP_TITLE}
+                    {activeMenuItem ? t(activeMenuItem.labelKey) : APP_TITLE}
                   </span>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+        {!isMobile && (
+          <div className="flex border-b h-14 items-center justify-between bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium tracking-tight text-foreground">
+                {activeMenuItem ? t(activeMenuItem.labelKey) : APP_TITLE}
+              </span>
+            </div>
+            <div className="ml-auto flex items-center gap-2">
+              <LanguageSwitcher />
+              <CurrencySwitcher />
             </div>
           </div>
         )}
