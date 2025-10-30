@@ -6,8 +6,10 @@ import RevenueChart from "@/components/RevenueChart";
 import OccupancyChart from "@/components/OccupancyChart";
 import UpcomingExpirations from "@/components/UpcomingExpirations";
 import { StatsSkeleton } from "@/components/LoadingSkeleton";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const { data: adLocations, isLoading: loadingAds } = trpc.adLocations.list.useQuery();
   const { data: landlords, isLoading: loadingLandlords } = trpc.landlords.list.useQuery();
   const { data: clients, isLoading: loadingClients } = trpc.clients.list.useQuery();
@@ -17,50 +19,50 @@ export default function Dashboard() {
 
   const stats = [
     {
-      title: "Total Ad Locations",
+      titleKey: "totalAdLocations",
       value: adLocations?.length || 0,
       icon: MapPin,
-      description: "Active advertising spaces",
+      descriptionKey: "activeAdvertisingSpaces",
       color: "text-blue-600",
       bgColor: "bg-blue-100 dark:bg-blue-900/30",
     },
     {
-      title: "Available Locations",
+      titleKey: "availableLocations",
       value: adLocations?.filter(ad => ad.availabilityStatus === "available").length || 0,
       icon: TrendingUp,
-      description: "Ready for rental",
+      descriptionKey: "readyForRental",
       color: "text-green-600",
       bgColor: "bg-green-100 dark:bg-green-900/30",
     },
     {
-      title: "Total Landlords",
+      titleKey: "totalLandlords",
       value: landlords?.length || 0,
       icon: Building2,
-      description: "Property owners",
+      descriptionKey: "propertyOwners",
       color: "text-purple-600",
       bgColor: "bg-purple-100 dark:bg-purple-900/30",
     },
     {
-      title: "Active Clients",
+      titleKey: "activeClients",
       value: clients?.filter(client => client.accountStatus === "active").length || 0,
       icon: Users,
-      description: "Current renters",
+      descriptionKey: "currentRenters",
       color: "text-amber-600",
       bgColor: "bg-amber-100 dark:bg-amber-900/30",
     },
     {
-      title: "Structures",
+      titleKey: "structures",
       value: structures?.length || 0,
       icon: Wrench,
-      description: "Under maintenance",
+      descriptionKey: "underMaintenance",
       color: "text-red-600",
       bgColor: "bg-red-100 dark:bg-red-900/30",
     },
     {
-      title: "Monthly Revenue",
+      titleKey: "monthlyRevenue",
       value: `$${((clients?.reduce((sum, client) => sum + (client.rentAmount || 0), 0) || 0) / 100).toLocaleString()}`,
       icon: DollarSign,
-      description: "Total rental income",
+      descriptionKey: "totalRentalIncome",
       color: "text-emerald-600",
       bgColor: "bg-emerald-100 dark:bg-emerald-900/30",
     },
@@ -75,9 +77,9 @@ export default function Dashboard() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{t("dashboard")}</h1>
           <p className="text-muted-foreground mt-2">
-            Overview of your ad locations management platform
+            {t("dashboardOverview")}
           </p>
         </div>
 
@@ -89,10 +91,10 @@ export default function Dashboard() {
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
-                <Card key={stat.title} className="card-hover">
+                <Card key={stat.titleKey} className="card-hover">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-medium text-muted-foreground">
-                      {stat.title}
+                      {t(stat.titleKey)}
                     </CardTitle>
                     <div className={`p-2 rounded-lg ${stat.bgColor}`}>
                       <Icon className={`h-4 w-4 ${stat.color}`} />
@@ -101,7 +103,7 @@ export default function Dashboard() {
                   <CardContent>
                     <div className="text-2xl font-bold">{stat.value}</div>
                     <p className="text-xs text-muted-foreground mt-1">
-                      {stat.description}
+                      {t(stat.descriptionKey)}
                     </p>
                   </CardContent>
                 </Card>
@@ -113,12 +115,12 @@ export default function Dashboard() {
         {/* Occupancy Rate */}
         <Card>
           <CardHeader>
-            <CardTitle>Occupancy Rate</CardTitle>
+            <CardTitle>{t("occupancyRate")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Current occupancy</span>
+                <span className="text-sm text-muted-foreground">{t("currentOccupancy")}</span>
                 <span className="text-2xl font-bold">{occupancyRate}%</span>
               </div>
               <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
@@ -136,24 +138,24 @@ export default function Dashboard() {
           {/* Payment Status */}
           <Card>
             <CardHeader>
-              <CardTitle>Payment Status</CardTitle>
+              <CardTitle>{t("paymentStatus")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Paid</span>
+                  <span className="text-sm">{t("paid")}</span>
                   <span className="status-paid px-2 py-1 rounded-full text-xs font-medium">
                     {clients?.filter(c => c.paymentStatus === "paid").length || 0}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Pending</span>
+                  <span className="text-sm">{t("pending")}</span>
                   <span className="status-pending px-2 py-1 rounded-full text-xs font-medium">
                     {clients?.filter(c => c.paymentStatus === "pending").length || 0}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Overdue</span>
+                  <span className="text-sm">{t("overdue")}</span>
                   <span className="status-overdue px-2 py-1 rounded-full text-xs font-medium">
                     {clients?.filter(c => c.paymentStatus === "overdue").length || 0}
                   </span>
@@ -165,24 +167,24 @@ export default function Dashboard() {
           {/* Maintenance Status */}
           <Card>
             <CardHeader>
-              <CardTitle>Maintenance Status</CardTitle>
+              <CardTitle>{t("maintenanceStatus")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Good</span>
+                  <span className="text-sm">{t("good")}</span>
                   <span className="status-paid px-2 py-1 rounded-full text-xs font-medium">
                     {structures?.filter(s => s.maintenanceStatus === "good").length || 0}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Needs Attention</span>
+                  <span className="text-sm">{t("needsAttention")}</span>
                   <span className="status-maintenance px-2 py-1 rounded-full text-xs font-medium">
                     {structures?.filter(s => s.maintenanceStatus === "needs_attention").length || 0}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Critical</span>
+                  <span className="text-sm">{t("critical")}</span>
                   <span className="status-overdue px-2 py-1 rounded-full text-xs font-medium">
                     {structures?.filter(s => s.maintenanceStatus === "critical").length || 0}
                   </span>

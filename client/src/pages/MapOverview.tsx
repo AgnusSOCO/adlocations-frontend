@@ -7,8 +7,10 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { MapPin, DollarSign, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 
 export default function MapOverview() {
+  const { t } = useTranslation();
   const { data: adLocations, isLoading } = trpc.adLocations.list.useQuery();
   const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
   const [viewport, setViewport] = useState({
@@ -71,7 +73,7 @@ export default function MapOverview() {
         <Card>
           <CardContent className="p-12 text-center">
             <p className="text-muted-foreground">
-              Map configuration is missing. Please set up Mapbox credentials.
+              {t("mapConfigurationMissing")}
             </p>
           </CardContent>
         </Card>
@@ -84,9 +86,9 @@ export default function MapOverview() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Map Overview</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{t("mapOverview")}</h1>
           <p className="text-muted-foreground mt-2">
-            View all ad locations on an interactive map
+            {t("viewAllLocationsMap")}
           </p>
         </div>
 
@@ -94,25 +96,25 @@ export default function MapOverview() {
         <Card>
           <CardContent className="p-4">
             <div className="flex flex-wrap items-center gap-4 text-sm">
-              <span className="font-medium">Legend:</span>
+              <span className="font-medium">{t("legend")}:</span>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span>Available</span>
+                <span>{t("available")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                <span>Occupied</span>
+                <span>{t("occupied")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <span>Maintenance</span>
+                <span>{t("maintenance")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                <span>Pending</span>
+                <span>{t("pending")}</span>
               </div>
               <span className="text-muted-foreground ml-auto">
-                {locationsWithCoords?.length || 0} locations with coordinates
+                {locationsWithCoords?.length || 0} {t("locationsWithCoordinates")}
               </span>
             </div>
           </CardContent>
@@ -174,11 +176,11 @@ export default function MapOverview() {
                             {selectedAd.address}
                           </p>
                           <div className="flex items-center justify-between">
-                            <span className="text-muted-foreground">Status:</span>
+                            <span className="text-muted-foreground">{t("status")}:</span>
                             <span
                               className={`px-2 py-1 rounded-full text-xs font-medium capitalize status-${selectedAd.availabilityStatus}`}
                             >
-                              {selectedAd.availabilityStatus}
+                              {t(selectedAd.availabilityStatus)}
                             </span>
                           </div>
                           {selectedAd.dimensions && (
@@ -198,7 +200,7 @@ export default function MapOverview() {
                         </div>
                         <Link href={`/ads/${selectedAd.id}`}>
                           <Button className="w-full mt-3" size="sm">
-                            View Details
+                            {t("viewDetails")}
                           </Button>
                         </Link>
                       </div>
@@ -210,10 +212,10 @@ export default function MapOverview() {
                   <div className="text-center">
                     <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
                     <p className="text-muted-foreground">
-                      No locations with coordinates available
+                      {t("noLocationsWithCoordinates")}
                     </p>
                     <p className="text-sm text-muted-foreground mt-2">
-                      Add coordinates to your ad locations to see them on the map
+                      {t("addCoordinatesToLocations")}
                     </p>
                   </div>
                 </div>
