@@ -79,7 +79,6 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@builder.io/vite-plugin-jsx-loc": "^0.1.1",
     "@tailwindcss/vite": "^4.0.0-beta.6",
     "@types/mapbox-gl": "^3.0.0",
     "@types/node": "^22.10.2",
