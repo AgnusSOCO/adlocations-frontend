@@ -19,11 +19,12 @@ import LandlordForm from "./pages/LandlordForm";
 import ClientForm from "./pages/ClientForm";
 import StructureForm from "./pages/StructureForm";
 import MapOverview from "./pages/MapOverview";
+import Login from "./pages/Login";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
+      <Route path={"/login"} component={Login} />
       <Route path={"/"} component={Home} />
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/ads"} component={AdLocations} />
@@ -41,7 +42,6 @@ function Router() {
       <Route path={"/structures/edit/:id"} component={StructureForm} />
       <Route path={"/map"} component={MapOverview} />
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
