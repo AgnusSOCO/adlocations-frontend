@@ -31,6 +31,7 @@ const resources = {
       noData: "No data available",
       signIn: "Sign in",
       signOut: "Sign out",
+      pleaseSignIn: "Please sign in to continue",
       
       // Dashboard
       totalAdLocations: "Total Ad Locations",
@@ -143,6 +144,7 @@ const resources = {
       noData: "No hay datos disponibles",
       signIn: "Iniciar sesión",
       signOut: "Cerrar sesión",
+      pleaseSignIn: "Por favor inicie sesión para continuar",
       
       // Dashboard
       totalAdLocations: "Total de Ubicaciones",
