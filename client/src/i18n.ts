@@ -34,6 +34,63 @@ const resources = {
       pleaseSignIn: "Please sign in to continue",
       
       // Dashboard
+      dashboardOverview: "Overview of your ad locations management platform",
+      activeAdvertisingSpaces: "Active advertising spaces",
+      readyForRental: "Ready for rental",
+      propertyOwners: "Property owners",
+      currentRenters: "Current renters",
+      underMaintenance: "Under maintenance",
+      totalRentalIncome: "Total rental income",
+      currentOccupancy: "Current occupancy",
+      
+      manageOutdoorAdvertisingSpaces: "Manage your outdoor advertising spaces",
+      managePropertyOwnersAndContracts: "Manage property owners and contracts",
+      manageClientRentalsAndAccounts: "Manage client rentals and accounts",
+      
+      exportCsv: "Export CSV",
+      exportPdf: "Export PDF",
+      viewDetails: "View Details",
+      addLandlord: "Add Landlord",
+      editLandlord: "Edit Landlord",
+      addClient: "Add Client",
+      editClient: "Edit Client",
+      
+      searchByTitleAddressType: "Search by title, address, or type...",
+      searchByNameEmailCompany: "Search by name, email, or company...",
+      
+      price: "Price",
+      monthlyRent: "Monthly Rent",
+      rentAmount: "Rent Amount",
+      
+      noLocationsFound: "No locations found",
+      noLandlordsFound: "No landlords found",
+      noClientsFound: "No clients found",
+      tryAdjustingSearch: "Try adjusting your search terms",
+      getStartedAddFirstAdLocation: "Get started by adding your first ad location",
+      getStartedAddFirstLandlord: "Get started by adding your first landlord",
+      getStartedAddFirstClient: "Get started by adding your first client",
+      
+      suspended: "Suspended",
+      
+      addStructure: "Add Structure",
+      editStructure: "Edit Structure",
+      trackMaintenanceLicenses: "Track maintenance and licenses for ad structures",
+      searchByLocationStatus: "Search by location or status...",
+      noStructuresFound: "No structures found",
+      getStartedAddFirstStructure: "Get started by adding your first structure",
+      lastMaintenance: "Last Maintenance",
+      nextMaintenance: "Next Maintenance",
+      licenseExpires: "License Expires",
+      unknownLocation: "Unknown Location",
+      
+      viewAllLocationsMap: "View all ad locations on an interactive map",
+      legend: "Legend",
+      locationsWithCoordinates: "locations with coordinates",
+      mapConfigurationMissing: "Map configuration is missing. Please set up Mapbox credentials.",
+      noLocationsWithCoordinates: "No locations with coordinates available",
+      addCoordinatesToLocations: "Add coordinates to your ad locations to see them on the map",
+      
+      // Dashboard
       totalAdLocations: "Total Ad Locations",
       availableLocations: "Available Locations",
       totalLandlords: "Total Landlords",
@@ -145,6 +202,63 @@ const resources = {
       signIn: "Iniciar sesión",
       signOut: "Cerrar sesión",
       pleaseSignIn: "Por favor inicie sesión para continuar",
+      
+      // Dashboard
+      dashboardOverview: "Resumen de su plataforma de gestión de ubicaciones publicitarias",
+      activeAdvertisingSpaces: "Espacios publicitarios activos",
+      readyForRental: "Listo para alquilar",
+      propertyOwners: "Propietarios de inmuebles",
+      currentRenters: "Arrendatarios actuales",
+      underMaintenance: "En mantenimiento",
+      totalRentalIncome: "Ingresos totales por alquiler",
+      currentOccupancy: "Ocupación actual",
+      
+      manageOutdoorAdvertisingSpaces: "Gestione sus espacios publicitarios exteriores",
+      managePropertyOwnersAndContracts: "Gestione propietarios y contratos",
+      manageClientRentalsAndAccounts: "Gestione alquileres y cuentas de clientes",
+      
+      exportCsv: "Exportar CSV",
+      exportPdf: "Exportar PDF",
+      viewDetails: "Ver Detalles",
+      addLandlord: "Agregar Propietario",
+      editLandlord: "Editar Propietario",
+      addClient: "Agregar Cliente",
+      editClient: "Editar Cliente",
+      
+      searchByTitleAddressType: "Buscar por título, dirección o tipo...",
+      searchByNameEmailCompany: "Buscar por nombre, correo o empresa...",
+      
+      price: "Precio",
+      monthlyRent: "Renta Mensual",
+      rentAmount: "Monto de Renta",
+      
+      noLocationsFound: "No se encontraron ubicaciones",
+      noLandlordsFound: "No se encontraron propietarios",
+      noClientsFound: "No se encontraron clientes",
+      tryAdjustingSearch: "Intente ajustar sus términos de búsqueda",
+      getStartedAddFirstAdLocation: "Comience agregando su primera ubicación publicitaria",
+      getStartedAddFirstLandlord: "Comience agregando su primer propietario",
+      getStartedAddFirstClient: "Comience agregando su primer cliente",
+      
+      suspended: "Suspendido",
+      
+      addStructure: "Agregar Estructura",
+      editStructure: "Editar Estructura",
+      trackMaintenanceLicenses: "Seguimiento de mantenimiento y licencias para estructuras publicitarias",
+      searchByLocationStatus: "Buscar por ubicación o estado...",
+      noStructuresFound: "No se encontraron estructuras",
+      getStartedAddFirstStructure: "Comience agregando su primera estructura",
+      lastMaintenance: "Último Mantenimiento",
+      nextMaintenance: "Próximo Mantenimiento",
+      licenseExpires: "Vencimiento de Licencia",
+      unknownLocation: "Ubicación Desconocida",
+      
+      viewAllLocationsMap: "Ver todas las ubicaciones publicitarias en un mapa interactivo",
+      legend: "Leyenda",
+      locationsWithCoordinates: "ubicaciones con coordenadas",
+      mapConfigurationMissing: "Falta la configuración del mapa. Por favor configure las credenciales de Mapbox.",
+      noLocationsWithCoordinates: "No hay ubicaciones con coordenadas disponibles",
+      addCoordinatesToLocations: "Agregue coordenadas a sus ubicaciones publicitarias para verlas en el mapa",
       
       // Dashboard
       totalAdLocations: "Total de Ubicaciones",

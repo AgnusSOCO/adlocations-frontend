@@ -8,8 +8,10 @@ import { exportClientsToCSV, exportClientsToPDF } from "@/lib/exportUtils";
 import { Link } from "wouter";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export default function Clients() {
+  const { t } = useTranslation();
   const { data: clients, isLoading } = trpc.clients.list.useQuery();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -46,9 +48,9 @@ export default function Clients() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Clients</h1>
+            <h1 className="text-3xl font-bold tracking-tight">{t("clients")}</h1>
             <p className="text-muted-foreground mt-2">
-              Manage client rentals and accounts
+              {t("manageClientRentalsAndAccounts")}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -58,7 +60,7 @@ export default function Clients() {
               disabled={!filteredClients || filteredClients.length === 0}
             >
               <Download className="h-4 w-4 mr-2" />
-              Export CSV
+              {t("exportCsv")}
             </Button>
             <Button
               variant="outline"
@@ -66,12 +68,12 @@ export default function Clients() {
               disabled={!filteredClients || filteredClients.length === 0}
             >
               <FileText className="h-4 w-4 mr-2" />
-              Export PDF
+              {t("exportPdf")}
             </Button>
             <Link href="/clients/new">
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
-                Add Client
+                {t("addClient")}
               </Button>
             </Link>
           </div>
@@ -82,7 +84,7 @@ export default function Clients() {
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by name, email, or company..."
+              placeholder={t("searchByNameEmailCompany")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -129,7 +131,7 @@ export default function Clients() {
                           client.accountStatus
                         )}`}
                       >
-                        {client.accountStatus}
+                        {t(client.accountStatus)}
                       </span>
                     </div>
                   </div>
@@ -150,18 +152,18 @@ export default function Clients() {
                     )}
                     <div className="pt-2 border-t space-y-2">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Payment Status</span>
+                        <span className="text-muted-foreground">{t("paymentStatus")}</span>
                         <span
                           className={`px-2 py-1 rounded-full text-xs font-medium ${getPaymentStatusClass(
                             client.paymentStatus
                           )}`}
                         >
-                          {client.paymentStatus}
+                          {t(client.paymentStatus)}
                         </span>
                       </div>
                       {client.rentAmount && (
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-muted-foreground">Rent Amount</span>
+                          <span className="text-muted-foreground">{t("rentAmount")}</span>
                           <span className="font-medium">
                             ${(client.rentAmount / 100).toLocaleString()}
                           </span>
@@ -174,7 +176,7 @@ export default function Clients() {
                   <Link href={`/clients/edit/${client.id}`}>
                     <Button variant="outline" size="sm" className="w-full">
                       <Edit className="h-4 w-4 mr-2" />
-                      Edit Client
+                      {t("editClient")}
                     </Button>
                   </Link>
                 </div>
@@ -185,17 +187,17 @@ export default function Clients() {
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <Users className="h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No clients found</h3>
+              <h3 className="text-lg font-semibold mb-2">{t("noClientsFound")}</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 {searchQuery
-                  ? "Try adjusting your search terms"
-                  : "Get started by adding your first client"}
+                  ? t("tryAdjustingSearch")
+                  : t("getStartedAddFirstClient")}
               </p>
               {!searchQuery && (
                 <Link href="/clients/new">
                   <Button>
                     <Plus className="h-4 w-4 mr-2" />
-                    Add Client
+                    {t("addClient")}
                   </Button>
                 </Link>
               )}

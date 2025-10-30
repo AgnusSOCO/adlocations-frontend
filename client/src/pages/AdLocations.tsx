@@ -7,8 +7,10 @@ import { Plus, Search, MapPin, Eye, Download, FileText } from "lucide-react";
 import { exportAdLocationsToCSV, exportAdLocationsToPDF } from "@/lib/exportUtils";
 import { useState } from "react";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 
 export default function AdLocations() {
+  const { t } = useTranslation();
   const { data: adLocations, isLoading } = trpc.adLocations.list.useQuery();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -37,9 +39,9 @@ export default function AdLocations() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Ad Locations</h1>
+            <h1 className="text-3xl font-bold tracking-tight">{t("adLocations")}</h1>
             <p className="text-muted-foreground mt-2">
-              Manage your outdoor advertising spaces
+              {t("manageOutdoorAdvertisingSpaces")}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -49,7 +51,7 @@ export default function AdLocations() {
               disabled={!filteredLocations || filteredLocations.length === 0}
             >
               <Download className="h-4 w-4 mr-2" />
-              Export CSV
+              {t("exportCsv")}
             </Button>
             <Button
               variant="outline"
@@ -57,12 +59,12 @@ export default function AdLocations() {
               disabled={!filteredLocations || filteredLocations.length === 0}
             >
               <FileText className="h-4 w-4 mr-2" />
-              Export PDF
+              {t("exportPdf")}
             </Button>
             <Link href="/ads/new">
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
-                Add Location
+                {t("addLocation")}
               </Button>
             </Link>
           </div>
@@ -73,7 +75,7 @@ export default function AdLocations() {
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by title, address, or type..."
+              placeholder={t("searchByTitleAddressType")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -118,25 +120,25 @@ export default function AdLocations() {
                         location.availabilityStatus
                       )}`}
                     >
-                      {location.availabilityStatus}
+                      {t(location.availabilityStatus)}
                     </span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">Type</span>
+                      <span className="text-muted-foreground">{t("type")}</span>
                       <span className="font-medium capitalize">{location.type}</span>
                     </div>
                     {location.dimensions && (
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Dimensions</span>
+                        <span className="text-muted-foreground">{t("dimensions")}</span>
                         <span className="font-medium">{location.dimensions}</span>
                       </div>
                     )}
                     {location.priceEstimate && (
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Price</span>
+                        <span className="text-muted-foreground">{t("price")}</span>
                         <span className="font-medium">
                           ${(location.priceEstimate / 100).toLocaleString()}
                         </span>
@@ -145,7 +147,7 @@ export default function AdLocations() {
                     <Link href={`/ads/${location.id}`}>
                       <Button variant="outline" size="sm" className="w-full mt-2">
                         <Eye className="h-4 w-4 mr-2" />
-                        View Details
+                        {t("viewDetails")}
                       </Button>
                     </Link>
                   </div>
@@ -157,17 +159,17 @@ export default function AdLocations() {
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <MapPin className="h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No locations found</h3>
+              <h3 className="text-lg font-semibold mb-2">{t("noLocationsFound")}</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 {searchQuery
-                  ? "Try adjusting your search terms"
-                  : "Get started by adding your first ad location"}
+                  ? t("tryAdjustingSearch")
+                  : t("getStartedAddFirstAdLocation")}
               </p>
               {!searchQuery && (
                 <Link href="/ads/new">
                   <Button>
                     <Plus className="h-4 w-4 mr-2" />
-                    Add Location
+                    {t("addLocation")}
                   </Button>
                 </Link>
               )}

@@ -8,8 +8,10 @@ import { exportLandlordsToCSV, exportLandlordsToPDF } from "@/lib/exportUtils";
 import { useState } from "react";
 import { Link } from "wouter";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export default function Landlords() {
+  const { t } = useTranslation();
   const { data: landlords, isLoading } = trpc.landlords.list.useQuery();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -37,9 +39,9 @@ export default function Landlords() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Landlords</h1>
+            <h1 className="text-3xl font-bold tracking-tight">{t("landlords")}</h1>
             <p className="text-muted-foreground mt-2">
-              Manage property owners and contracts
+              {t("managePropertyOwnersAndContracts")}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -49,7 +51,7 @@ export default function Landlords() {
               disabled={!filteredLandlords || filteredLandlords.length === 0}
             >
               <Download className="h-4 w-4 mr-2" />
-              Export CSV
+              {t("exportCsv")}
             </Button>
             <Button
               variant="outline"
@@ -57,12 +59,12 @@ export default function Landlords() {
               disabled={!filteredLandlords || filteredLandlords.length === 0}
             >
               <FileText className="h-4 w-4 mr-2" />
-              Export PDF
+              {t("exportPdf")}
             </Button>
             <Link href="/landlords/new">
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
-                Add Landlord
+                {t("addLandlord")}
               </Button>
             </Link>
           </div>
@@ -73,7 +75,7 @@ export default function Landlords() {
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by name, email, or company..."
+              placeholder={t("searchByNameEmailCompany")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -119,7 +121,7 @@ export default function Landlords() {
                         landlord.paymentStatus
                       )}`}
                     >
-                      {landlord.paymentStatus}
+                      {t(landlord.paymentStatus)}
                     </span>
                   </div>
                 </CardHeader>
@@ -139,7 +141,7 @@ export default function Landlords() {
                     )}
                     {landlord.rentAmount && (
                       <div className="flex items-center justify-between text-sm pt-2 border-t">
-                        <span className="text-muted-foreground">Monthly Rent</span>
+                        <span className="text-muted-foreground">{t("monthlyRent")}</span>
                         <span className="font-medium">
                           ${(landlord.rentAmount / 100).toLocaleString()}
                         </span>
@@ -151,7 +153,7 @@ export default function Landlords() {
                   <Link href={`/landlords/edit/${landlord.id}`}>
                     <Button variant="outline" size="sm" className="w-full">
                       <Edit className="h-4 w-4 mr-2" />
-                      Edit Landlord
+                      {t("editLandlord")}
                     </Button>
                   </Link>
                 </div>
@@ -162,17 +164,17 @@ export default function Landlords() {
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <Building2 className="h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No landlords found</h3>
+              <h3 className="text-lg font-semibold mb-2">{t("noLandlordsFound")}</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 {searchQuery
-                  ? "Try adjusting your search terms"
-                  : "Get started by adding your first landlord"}
+                  ? t("tryAdjustingSearch")
+                  : t("getStartedAddFirstLandlord")}
               </p>
               {!searchQuery && (
                 <Link href="/landlords/new">
                   <Button>
                     <Plus className="h-4 w-4 mr-2" />
-                    Add Landlord
+                    {t("addLandlord")}
                   </Button>
                 </Link>
               )}

@@ -8,14 +8,16 @@ import { Link } from "wouter";
 import { useState } from "react";
 import { toast } from "sonner";
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 export default function Structures() {
+  const { t } = useTranslation();
   const { data: structures, isLoading } = trpc.structures.list.useQuery();
   const { data: adLocations } = trpc.adLocations.list.useQuery();
   const [searchQuery, setSearchQuery] = useState("");
 
   const getAdLocationTitle = (adLocationId: number) => {
-    return adLocations?.find((ad) => ad.id === adLocationId)?.title || "Unknown Location";
+    return adLocations?.find((ad) => ad.id === adLocationId)?.title || t("unknownLocation");
   };
 
   const filteredStructures = structures?.filter((structure) => {
@@ -52,15 +54,15 @@ export default function Structures() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Structures</h1>
+            <h1 className="text-3xl font-bold tracking-tight">{t("structures")}</h1>
             <p className="text-muted-foreground mt-2">
-              Track maintenance and licenses for ad structures
+              {t("trackMaintenanceLicenses")}
             </p>
           </div>
           <Link href="/structures/new">
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Add Structure
+              {t("addStructure")}
             </Button>
           </Link>
         </div>
@@ -70,7 +72,7 @@ export default function Structures() {
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by location or status..."
+              placeholder={t("searchByLocationStatus")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -117,7 +119,7 @@ export default function Structures() {
                         )}`}
                       >
                         <Icon className="h-3 w-3" />
-                        {structure.maintenanceStatus.replace("_", " ")}
+                        {t(structure.maintenanceStatus === "needs_attention" ? "needsAttention" : structure.maintenanceStatus)}
                       </span>
                     </div>
                   </CardHeader>
@@ -125,7 +127,7 @@ export default function Structures() {
                     <div className="space-y-3">
                       {structure.lastMaintenanceDate && (
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-muted-foreground">Last Maintenance</span>
+                          <span className="text-muted-foreground">{t("lastMaintenance")}</span>
                           <span className="font-medium">
                             {format(new Date(structure.lastMaintenanceDate), "MMM d, yyyy")}
                           </span>
@@ -133,7 +135,7 @@ export default function Structures() {
                       )}
                       {structure.nextMaintenanceDate && (
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-muted-foreground">Next Maintenance</span>
+                          <span className="text-muted-foreground">{t("nextMaintenance")}</span>
                           <span className="font-medium">
                             {format(new Date(structure.nextMaintenanceDate), "MMM d, yyyy")}
                           </span>
@@ -141,7 +143,7 @@ export default function Structures() {
                       )}
                       {structure.licenseExpiryDate && (
                         <div className="flex items-center justify-between text-sm pt-2 border-t">
-                          <span className="text-muted-foreground">License Expires</span>
+                          <span className="text-muted-foreground">{t("licenseExpires")}</span>
                           <span className="font-medium">
                             {format(new Date(structure.licenseExpiryDate), "MMM d, yyyy")}
                           </span>
@@ -149,7 +151,7 @@ export default function Structures() {
                       )}
                       {structure.technicianNotes && (
                         <div className="text-sm pt-2 border-t">
-                          <p className="text-muted-foreground mb-1">Notes</p>
+                          <p className="text-muted-foreground mb-1">{t("notes")}</p>
                           <p className="text-xs line-clamp-2">{structure.technicianNotes}</p>
                         </div>
                       )}
@@ -159,7 +161,7 @@ export default function Structures() {
                     <Link href={`/structures/edit/${structure.id}`}>
                       <Button variant="outline" size="sm" className="w-full">
                         <Edit className="h-4 w-4 mr-2" />
-                        Edit Structure
+                        {t("editStructure")}
                       </Button>
                     </Link>
                   </div>
@@ -171,17 +173,17 @@ export default function Structures() {
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <Wrench className="h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No structures found</h3>
+              <h3 className="text-lg font-semibold mb-2">{t("noStructuresFound")}</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 {searchQuery
-                  ? "Try adjusting your search terms"
-                  : "Get started by adding your first structure"}
+                  ? t("tryAdjustingSearch")
+                  : t("getStartedAddFirstStructure")}
               </p>
               {!searchQuery && (
                 <Link href="/structures/new">
                   <Button>
                     <Plus className="h-4 w-4 mr-2" />
-                    Add Structure
+                    {t("addStructure")}
                   </Button>
                 </Link>
               )}
