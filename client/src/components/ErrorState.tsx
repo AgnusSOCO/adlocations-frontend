@@ -2,6 +2,7 @@ import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 
+import { useTranslation } from "react-i18next";
 interface ErrorStateProps {
   title?: string;
   message?: string;

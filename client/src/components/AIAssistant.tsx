@@ -7,12 +7,14 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Streamdown } from "streamdown";
 
+import { useTranslation } from "react-i18next";
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
 export function AIAssistant() {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -30,7 +32,7 @@ export function AIAssistant() {
       ]);
     },
     onError: (error) => {
-      toast.error("Failed to get AI response: " + error.message);
+      toast.error(t("failedToGetAiResponse") + error.message);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "Sorry, I encountered an error. Please try again." },
@@ -77,7 +79,7 @@ export function AIAssistant() {
           <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
             <Bot className="h-5 w-5 text-primary" />
           </div>
-          <CardTitle className="text-lg">AI Assistant</CardTitle>
+          <CardTitle className="text-lg">{t("aiAssistant")}</CardTitle>
         </div>
         <Button
           variant="ghost"
@@ -125,7 +127,7 @@ export function AIAssistant() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask me anything..."
+            placeholder={t("askMeAnything")}
             disabled={assistantMutation.isPending}
           />
           <Button

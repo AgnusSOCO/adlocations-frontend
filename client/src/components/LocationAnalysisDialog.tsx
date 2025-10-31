@@ -13,6 +13,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
+import { useTranslation } from "react-i18next";
 interface LocationAnalysisDialogProps {
   location: {
     id: number;
@@ -36,10 +37,10 @@ export function LocationAnalysisDialog({ location }: LocationAnalysisDialogProps
   const analyzeMutation = trpc.deepseek.analyzeLocation.useMutation({
     onSuccess: (data) => {
       setAnalysis(data);
-      toast.success("AI analysis complete!");
+      toast.success(t("aiAnalysisComplete"));
     },
     onError: (error) => {
-      toast.error("Analysis failed: " + error.message);
+      toast.error(t("analysisFailed") + error.message);
     },
   });
 

@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Save } from "lucide-react";
 import { Link } from "wouter";
 
+import { useTranslation } from "react-i18next";
 type LandlordFormData = {
   name: string;
   email?: string;
@@ -37,6 +38,7 @@ type LandlordFormData = {
 };
 
 export default function LandlordForm() {
+  const { t } = useTranslation();
   const [, params] = useRoute("/landlords/edit/:id");
   const [, setLocation] = useLocation();
   const isEdit = !!params?.id;

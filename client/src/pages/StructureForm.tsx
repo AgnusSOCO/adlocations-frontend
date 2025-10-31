@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Save } from "lucide-react";
 import { Link } from "wouter";
 
+import { useTranslation } from "react-i18next";
 type StructureFormData = {
   adLocationId: string;
   maintenanceStatus: "good" | "needs_attention" | "critical";
@@ -34,6 +35,7 @@ type StructureFormData = {
 };
 
 export default function StructureForm() {
+  const { t } = useTranslation();
   const [, params] = useRoute("/structures/edit/:id");
   const [, setLocation] = useLocation();
   const isEdit = !!params?.id;

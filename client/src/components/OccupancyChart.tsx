@@ -10,7 +10,9 @@ import {
 } from "recharts";
 import { BarChart3 } from "lucide-react";
 
+import { useTranslation } from "react-i18next";
 export default function OccupancyChart() {
+  const { t } = useTranslation();
   const { data: adLocations } = trpc.adLocations.list.useQuery();
 
   const getOccupancyData = () => {

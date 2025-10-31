@@ -5,7 +5,9 @@ import { APP_LOGO, APP_TITLE } from "@/const";
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 
+import { useTranslation } from "react-i18next";
 export default function Home() {
+  const { t } = useTranslation();
   const { user, loading, isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
 

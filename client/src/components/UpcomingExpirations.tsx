@@ -5,7 +5,9 @@ import { differenceInDays, format } from "date-fns";
 import { Link } from "wouter";
 import { Button } from "./ui/button";
 
+import { useTranslation } from "react-i18next";
 export default function UpcomingExpirations() {
+  const { t } = useTranslation();
   const { data: clients } = trpc.clients.list.useQuery();
   const { data: landlords } = trpc.landlords.list.useQuery();
   const { data: structures } = trpc.structures.list.useQuery();

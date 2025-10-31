@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Save } from "lucide-react";
 import { Link } from "wouter";
 
+import { useTranslation } from "react-i18next";
 type ClientFormData = {
   name: string;
   email?: string;
@@ -40,6 +41,7 @@ type ClientFormData = {
 };
 
 export default function ClientForm() {
+  const { t } = useTranslation();
   const [, params] = useRoute("/clients/edit/:id");
   const [, setLocation] = useLocation();
   const isEdit = !!params?.id;

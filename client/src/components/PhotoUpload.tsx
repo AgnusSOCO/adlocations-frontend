@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 
+import { useTranslation } from "react-i18next";
 interface PhotoUploadProps {
   onUpload: (urls: string[]) => void;
   existingPhotos?: string[];
@@ -14,6 +15,7 @@ export default function PhotoUpload({
   existingPhotos = [],
   maxFiles = 5,
 }: PhotoUploadProps) {
+  const { t } = useTranslation();
   const [photos, setPhotos] = useState<string[]>(existingPhotos);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -78,7 +80,7 @@ export default function PhotoUpload({
     const newPhotos = photos.filter((_, i) => i !== index);
     setPhotos(newPhotos);
     onUpload(newPhotos);
-    toast.success("Photo removed");
+    toast.success(t("photoRemoved"));
   };
 
   return (

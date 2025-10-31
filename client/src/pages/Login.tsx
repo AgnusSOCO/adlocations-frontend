@@ -4,7 +4,9 @@ import { supabase } from '@/lib/supabase';
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
+import { useTranslation } from "react-i18next";
 export default function Login() {
+  const { t } = useTranslation();
   const [, setLocation] = useLocation();
 
   useEffect(() => {

@@ -20,6 +20,7 @@ import { Link } from "wouter";
 import PhotoUpload from "@/components/PhotoUpload";
 import MapPicker from "@/components/MapPicker";
 
+import { useTranslation } from "react-i18next";
 type AdLocationFormData = {
   title: string;
   address: string;
@@ -38,6 +39,7 @@ type AdLocationFormData = {
 };
 
 export default function AdLocationForm() {
+  const { t } = useTranslation();
   const [, params] = useRoute("/ads/edit/:id");
   const [, setLocation] = useLocation();
   const isEdit = !!params?.id;

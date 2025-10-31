@@ -83,7 +83,7 @@ export function PhotoDocumentation({ structureId }: PhotoDocumentationProps) {
         takenAt: new Date(),
       });
     } catch (error) {
-      toast.error("Failed to upload photo");
+      toast.error(t("failedToUploadPhoto"));
     } finally {
       setUploading(false);
     }
@@ -162,7 +162,7 @@ export function PhotoDocumentation({ structureId }: PhotoDocumentationProps) {
                 id="caption"
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                placeholder="Add a description or notes about this photo..."
+                placeholder=t("addADescriptionOrNotesAboutThisPhoto")
                 rows={3}
               />
             </div>
@@ -192,7 +192,7 @@ export function PhotoDocumentation({ structureId }: PhotoDocumentationProps) {
                 <div key={photo.id} className="rounded-lg border overflow-hidden">
                   <img
                     src={photo.photoUrl}
-                    alt={photo.caption || "Photo"}
+                    alt={photo.caption || t("photo")}
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-3 space-y-1">

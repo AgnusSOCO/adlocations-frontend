@@ -9,7 +9,9 @@ import { toast } from "sonner";
 import MapView from "@/components/MapView";
 import { LocationAnalysisDialog } from "@/components/LocationAnalysisDialog";
 
+import { useTranslation } from "react-i18next";
 export default function AdLocationDetail() {
+  const { t } = useTranslation();
   const [, params] = useRoute("/ads/:id");
   const [, setLocation] = useLocation();
   const adId = params?.id ? parseInt(params.id) : 0;
@@ -27,7 +29,7 @@ export default function AdLocationDetail() {
   const utils = trpc.useUtils();
   const deleteMutation = trpc.adLocations.delete.useMutation({
     onSuccess: () => {
-      toast.success("Ad location deleted successfully");
+      toast.success(t("adLocationDeletedSuccessfully"));
       utils.adLocations.list.invalidate();
       setLocation("/ads");
     },
