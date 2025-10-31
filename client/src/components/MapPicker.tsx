@@ -5,6 +5,7 @@ import { MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { useTranslation } from "react-i18next";
 
 interface MapPickerProps {
   latitude?: string;
@@ -20,8 +21,6 @@ export default function MapPicker({
   const { t } = useTranslation();
   const mapboxToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
   const mapboxStyle = import.meta.env.VITE_MAPBOX_STYLE_URL;
-
-import { useTranslation } from "react-i18next";
   const [viewport, setViewport] = useState({
     latitude: latitude ? parseFloat(latitude) : 40.7128,
     longitude: longitude ? parseFloat(longitude) : -74.006,
